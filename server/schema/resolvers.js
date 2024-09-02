@@ -19,15 +19,23 @@ const resolvers = {
             return { token, user };
         },
         login: async (_parent, { username, email, password }) => {
+            console.log(`BACKEND data: {username: ${username}, email: ${email}, password: ${password}}`);
+            
             const user = await User.findOne({
                 $or: [{ username: username }, { email: email }]
             });
 
-            if (!user) throw AuthenticationError;
+            if (!user) {
+                console.log("Cannot find user");
+                throw AuthenticationError;
+            }
 
             const correctPw = await user.isCorrectPassword(password);
 
-            if (!correctPw) throw AuthenticationError;
+            if (!correctPw){
+                console.log("Password is not correct");
+                throw AuthenticationError;
+            }
 
             const token = signToken(user);
             return { token, user };
