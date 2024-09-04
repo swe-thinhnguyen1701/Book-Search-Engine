@@ -36,13 +36,11 @@ const LoginForm = () => {
 
       Auth.login(data.login.token);
     } catch (err) {
-      console.error(err);
       setShowAlert(true);
     }
 
     setUserFormData({
-      username: '',
-      email: '',
+      identifier: '',
       password: '',
     });
   };
@@ -51,7 +49,7 @@ const LoginForm = () => {
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          {error && "Something wrong"}
+          {error && "username/email or password is incorrect"}
         </Alert>
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='identifer'>Username/Email</Form.Label>
