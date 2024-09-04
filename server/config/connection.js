@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './server/.env' });
+require('dotenv').config({ path: '/etc/secrets/mongouri' });
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/googlebooks');
